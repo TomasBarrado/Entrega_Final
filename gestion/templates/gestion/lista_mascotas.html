@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tus Mascotas</h2>
+<a href="{% url 'agregar_mascota' %}">Agregar Mascota</a>
+<ul>
+    {% for mascota in mascotas %}
+        <li>
+            {{ mascota.nombre }} - {{ mascota.especie }}
+            <a href="{% url 'editar_mascota' mascota.pk %}">Editar</a>
+            <a href="{% url 'eliminar_mascota' mascota.pk %}">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Veterinarios</h2>
+<form method="GET">
+    <input type="text" name="q" placeholder="Buscar por nombre">
+    <button type="submit">Buscar</button>
+</form>
+<ul>
+    {% for vet in veterinarios %}
+        <li>{{ vet.nombre }} - {{ vet.matricula }}: {{ vet.descripcion }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
