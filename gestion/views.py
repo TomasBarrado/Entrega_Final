@@ -49,9 +49,13 @@ def lista_servicios(request):
     return render(request, 'gestion/lista_servicios.html', {'servicios': servicios})
 
 def lista_veterinarios(request):
-    query = request.GET.get('q')
+    veterinarios = Veterinario.objects.all()
+    return render(request, 'gestion/lista_veterinarios.html', {'veterinarios': veterinarios})
+
+def buscar_veterinario(request):
+    query = request.GET.get('q', '')
     if query:
         veterinarios = Veterinario.objects.filter(nombre__icontains=query)
     else:
-        veterinarios = Veterinario.objects.all()
-    return render(request, 'gestion/lista_veterinarios.html', {'veterinarios': veterinarios})
+        veterinarios = []
+    return render(request, 'gestion/buscar_veterinario.html', {'veterinarios': veterinarios, 'query': query})

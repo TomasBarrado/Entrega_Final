@@ -1,13 +1,20 @@
 {% extends "base.html" %}
+
 {% block content %}
 <h2>Veterinarios</h2>
-<form method="GET">
-    <input type="text" name="q" placeholder="Buscar por nombre">
-    <button type="submit">Buscar</button>
-</form>
+<p>A continuación, puedes conocer a nuestro equipo de profesionales:</p>
+
 <ul>
     {% for vet in veterinarios %}
-        <li>{{ vet.nombre }} - {{ vet.matricula }}: {{ vet.descripcion }}</li>
+        <li>
+            <strong>{{ vet.nombre }}</strong> - Matrícula: {{ vet.matricula }} <br>
+            <span>{{ vet.descripcion }}</span>
+        </li>
+    {% empty %}
+        <p>No hay veterinarios registrados en este momento.</p>
     {% endfor %}
 </ul>
+
+<a href="{% url 'buscar_veterinario' %}" class="btn btn-primary mt-3">Buscar Veterinario</a>
+<a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">Volver al Inicio</a>
 {% endblock %}

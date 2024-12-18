@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Buscar Veterinario</h2>
+<form method="GET">
+    <input type="text" name="q" placeholder="Buscar por nombre" value="{{ query }}">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if veterinarios %}
+    <ul>
+        {% for vet in veterinarios %}
+            <li>
+                <strong>{{ vet.nombre }}</strong> - Matrícula: {{ vet.matricula }} <br>
+                <span>{{ vet.descripcion }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No se encontraron resultados para tu búsqueda.</p>
+{% endif %}
+
+<a href="{% url 'lista_veterinarios' %}" class="btn btn-secondary mt-3">Volver al Listado</a>
+{% endblock %}
