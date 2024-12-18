@@ -1,9 +1,13 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Servicios</h2>
-<ul>
-    {% for servicio in servicios %}
-        <li>{{ servicio.nombre }}: {{ servicio.descripcion }}</li>
-    {% endfor %}
-</ul>
+    <h2>Servicios Disponibles en Veterinaria Coder</h2>
+    <ul>
+        {% for servicio in servicios %}
+            <li>
+                <h3>{{ servicio.nombre }}</h3>
+                <p>{{ servicio.descripcion }}</p>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
