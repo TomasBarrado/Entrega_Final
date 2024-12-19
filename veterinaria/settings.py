@@ -71,6 +71,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = 'inicio'
 
 LANGUAGE_CODE = 'en-us'
 

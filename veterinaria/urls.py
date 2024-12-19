@@ -6,6 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', gestion_views.inicio, name='inicio'),
     path('gestion/', include('gestion.urls')), 
-    path('accounts/', include('users.urls')), 
+    path('accounts/', include('users.urls')),
 ]
 
