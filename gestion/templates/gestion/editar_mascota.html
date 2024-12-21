@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Editar Mascota</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+</form>
+<a href="{% url 'lista_mascotas' %}">Volver a la lista de mascotas</a>
+{% endblock %}
