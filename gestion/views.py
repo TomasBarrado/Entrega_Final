@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Mascota, Servicio, Veterinario
-from .forms import MascotaForm
+from .forms import MascotaForm, VeterinarioForm, ServicioForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
@@ -62,14 +62,45 @@ def eliminar_mascota(request, pk):
         return redirect('lista_mascotas')
     return render(request, 'gestion/eliminar_mascota.html', {'mascota': mascota})
 
-# Vistas de lista de servicios y veterinarios sin LoginRequiredMixin
+@login_required
+def agregar_veterinario(request):
+    if request.method == 'POST':
+        form = VeterinarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_veterinarios')
+    else:
+        form = VeterinarioForm()
+    return render(request, 'gestion/agregar_veterinario.html', {'form': form})
+
+@login_required
+def eliminar_servicio(request, pk):
+    servicio = get_object_or_404(Servicio, pk=pk)
+    if request.method == 'POST':
+        servicio.delete()
+        return redirect('lista_servicios')  
+    return render(request, 'gestion/eliminar_servicio.html', {'servicio': servicio})
+
+@login_required
+def agregar_servicio(request):
+    if request.method == 'POST':
+        form = ServicioForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            return redirect('lista_servicios')
+    else:
+        form = ServicioForm()
+    return render(request, 'gestion/agregar_servicio.html', {'form': form})
+
+
+
 class ListaServiciosView(ListView):
     model = Servicio
     template_name = 'gestion/lista_servicios.html'
     context_object_name = 'servicios'
 
     def get_queryset(self):
-        return Servicio.objects.all()  # Mostrar todos los servicios
+        return Servicio.objects.all() 
 
 class ListaVeterinariosView(ListView):
     model = Veterinario
@@ -77,7 +108,6 @@ class ListaVeterinariosView(ListView):
     context_object_name = 'veterinarios'
 
 
-# Vistas de edición y eliminación con LoginRequiredMixin para protección
 class EditarServicioView(LoginRequiredMixin, UpdateView):
     model = Servicio
     fields = ['nombre', 'descripcion']
@@ -85,12 +115,12 @@ class EditarServicioView(LoginRequiredMixin, UpdateView):
     context_object_name = 'servicio'
 
     def get_success_url(self):
-        return reverse('lista_servicios')  # Redirige a la lista de servicios después de la edición
+        return reverse('lista_servicios')  
 
 class EditarVeterinarioView(UpdateView):
     model = Veterinario
     template_name = 'gestion/editar_veterinario.html'
-    fields = ['nombre', 'matricula']  # Campos que se desean editar
+    fields = ['nombre', 'matricula']  
 
     def get_success_url(self):
         return reverse('lista_veterinarios')
@@ -104,22 +134,22 @@ class EliminarVeterinarioView(DeleteView):
 class EditarUsuarioView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'gestion/editar_usuario.html'
-    fields = ['username', 'email', 'first_name', 'last_name']  # Campos a editar
+    fields = ['username', 'email', 'first_name', 'last_name']  
 
     def get_success_url(self):
         return reverse('lista_usuarios')
 
-# Rutas adicionales de usuario
+
 class MascotasPorUsuarioView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Mascota
     template_name = 'gestion/mascotas_por_usuario.html'
     context_object_name = 'mascotas'
 
     def test_func(self):
-        return self.request.user.is_staff  # Solo los administradores pueden ver las mascotas de los usuarios
+        return self.request.user.is_staff  
 
     def get_queryset(self):
-        return Mascota.objects.all()  # Muestra todas las mascotas
+        return Mascota.objects.all()  
 
 
 class ListaMascotasView(LoginRequiredMixin, ListView):
@@ -128,15 +158,15 @@ class ListaMascotasView(LoginRequiredMixin, ListView):
     context_object_name = 'mascotas'
 
     def get_queryset(self):
-        return Mascota.objects.filter(dueño=self.request.user)  # Solo las mascotas del usuario logueado
+        return Mascota.objects.filter(dueño=self.request.user)  
 
 class EditarMascotaView(LoginRequiredMixin, UpdateView):
     model = Mascota
     template_name = 'gestion/editar_mascota.html'
-    fields = ['nombre', 'especie', 'raza', 'edad']  # Campos que deseas editar
+    fields = ['nombre', 'especie', 'raza', 'edad']  
 
     def get_queryset(self):
-        return Mascota.objects.filter(dueño=self.request.user)  # Solo las mascotas del usuario logueado
+        return Mascota.objects.filter(dueño=self.request.user)  
 
 class EliminarMascotaView(LoginRequiredMixin, DeleteView):
     model = Mascota
@@ -145,7 +175,7 @@ class EliminarMascotaView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('lista_mascotas')
 
     def get_queryset(self):
-        return Mascota.objects.filter(dueño=self.request.user)  # Solo las mascotas del usuario logueado
+        return Mascota.objects.filter(dueño=self.request.user)  
 
 class ListaUsuariosView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = User

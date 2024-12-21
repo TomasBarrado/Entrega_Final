@@ -3,13 +3,16 @@
 {% block content %}
   <h2>Lista de Veterinarios</h2>
 
+  {% if user.is_authenticated and user.is_staff %}
+    <a href="{% url 'agregar_veterinario' %}" class="btn btn-primary mb-3">Agregar Veterinario</a>
+  {% endif %}
+
   <ul>
     {% for veterinario in veterinarios %}
       <li>
         <strong>{{ veterinario.nombre }}</strong> - {{ veterinario.matricula }}
-        <p>{{ veterinario.descripcion }}</p>  <!-- Mostrar la descripción -->
-        
-        <!-- Botón para editar y eliminar solo si es admin -->
+        <p>{{ veterinario.descripcion }}</p>
+
         {% if user.is_authenticated and user.is_staff %}
           <a href="{% url 'editar_veterinario' veterinario.pk %}" class="btn btn-warning btn-sm">Editar</a>
           <a href="{% url 'eliminar_veterinario' veterinario.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
