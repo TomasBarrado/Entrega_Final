@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Error</h2>
+<p>No tienes un perfil de Dueño registrado. Por favor, completa tu información para acceder a tus mascotas.</p>
+<a href="{% url 'crear_perfil' %}" class="btn btn-primary">Crear Perfil</a>
+{% endblock %}
