@@ -1,13 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Editar Servicio</h2>
-  
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar cambios</button>
-  </form>
+  <h2>Listado de Mascotas de Todos los Dueños</h2>
 
-  <a href="{% url 'lista_servicios' %}">Volver a la lista de servicios</a>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre de la Mascota</th>
+        <th>Dueño</th>
+        <th>Especie</th>
+        <th>Raza</th>
+        <th>Edad</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mascota in mascotas %}
+        <tr>
+          <td>{{ mascota.nombre }}</td>
+          <td>{{ mascota.dueño.username }}</td>
+          <td>{{ mascota.especie }}</td>
+          <td>{{ mascota.raza }}</td>
+          <td>{{ mascota.edad }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No hay mascotas registradas.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
 {% endblock %}

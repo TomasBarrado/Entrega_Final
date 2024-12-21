@@ -44,6 +44,10 @@
                             <a class="nav-link" href="{% url 'signup' %}">Registrarse</a>
                         </li>
                     {% endif %}
+                    {% if user.is_authenticated and user.is_staff %}
+                        <a href="{% url 'mascotas_por_usuario' %}" class="btn btn-info">Ver Mascotas</a>
+                    {% endif %}
+
 
                 </ul>
             </div>

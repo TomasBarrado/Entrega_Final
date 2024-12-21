@@ -12,10 +12,10 @@ urlpatterns = [
     path('usuarios/editar/<int:pk>/', gestion_views.EditarUsuarioView.as_view(), name='editar_usuario'),
     path('servicios/', gestion_views.ListaServiciosView.as_view(), name='lista_servicios'),
     path('servicios/editar/<int:pk>/', gestion_views.EditarServicioView.as_view(), name='editar_servicio'),
-    path('mascotas/usuarios/', gestion_views.MascotasPorUsuarioView.as_view(), name='mascotas_por_usuario'),
     path('veterinarios/agregar/', views.agregar_veterinario, name='agregar_veterinario'),
     path('servicios/eliminar/<int:pk>/', views.eliminar_servicio, name='eliminar_servicio'),
     path('servicios/agregar/', views.agregar_servicio, name='agregar_servicio'),
+    path('mascotas/dueños/', gestion_views.MascotasPorUsuarioView.as_view(), name='mascotas_por_usuario'),
 ]
 
 

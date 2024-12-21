@@ -146,10 +146,10 @@ class MascotasPorUsuarioView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     context_object_name = 'mascotas'
 
     def test_func(self):
-        return self.request.user.is_staff  
+        return self.request.user.is_staff 
 
     def get_queryset(self):
-        return Mascota.objects.all()  
+        return Mascota.objects.all()
 
 
 class ListaMascotasView(LoginRequiredMixin, ListView):
