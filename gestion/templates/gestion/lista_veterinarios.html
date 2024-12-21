@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Veterinarios</h2>
-<p>A continuación, puedes conocer a nuestro equipo de profesionales:</p>
+  <h2>Lista de Veterinarios</h2>
 
-<ul>
-    {% for vet in veterinarios %}
-        <li>
-            <strong>{{ vet.nombre }}</strong> - Matrícula: {{ vet.matricula }} <br>
-            <span>{{ vet.descripcion }}</span>
-        </li>
+  <ul>
+    {% for veterinario in veterinarios %}
+      <li>
+        <strong>{{ veterinario.nombre }}</strong> - {{ veterinario.matricula }}
+        <p>{{ veterinario.descripcion }}</p>  <!-- Mostrar la descripción -->
+        
+        <!-- Botón para editar y eliminar solo si es admin -->
+        {% if user.is_authenticated and user.is_staff %}
+          <a href="{% url 'editar_veterinario' veterinario.pk %}" class="btn btn-warning btn-sm">Editar</a>
+          <a href="{% url 'eliminar_veterinario' veterinario.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+        {% endif %}
+      </li>
     {% empty %}
-        <p>No hay veterinarios registrados en este momento.</p>
+      <p>No hay veterinarios registrados en este momento.</p>
     {% endfor %}
-</ul>
+  </ul>
 
-<a href="{% url 'buscar_veterinario' %}" class="btn btn-primary mt-3">Buscar Veterinario</a>
-<a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">Volver al Inicio</a>
+  <a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">Volver al Inicio</a>
 {% endblock %}
+

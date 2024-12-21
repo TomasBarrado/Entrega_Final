@@ -87,14 +87,19 @@ class EditarServicioView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('lista_servicios')  # Redirige a la lista de servicios después de la edición
 
-class EditarVeterinarioView(LoginRequiredMixin, UpdateView):
+class EditarVeterinarioView(UpdateView):
     model = Veterinario
-    fields = ['nombre', 'matricula']
     template_name = 'gestion/editar_veterinario.html'
-    context_object_name = 'veterinario'
+    fields = ['nombre', 'matricula']  # Campos que se desean editar
 
     def get_success_url(self):
         return reverse('lista_veterinarios')
+    
+class EliminarVeterinarioView(DeleteView):
+    model = Veterinario
+    template_name = 'gestion/eliminar_veterinario.html'
+    context_object_name = 'veterinario'
+    success_url = reverse_lazy('lista_veterinarios')
 
 class EditarUsuarioView(LoginRequiredMixin, UpdateView):
     model = User
