@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Editar Perfil {% endblock title %}
+
+{% block content %}
+    <h1>Editar perfil de {{ usuario }}</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ mi_form.as_table }}
+        </table>
+        <input type="submit" value="Actualizar">
+    </form>
+{% endblock content %}

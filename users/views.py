@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroForm
+from .forms import RegistroForm, UserEditForm
+from django.contrib import messages
+
 
 
 def registro(request):
@@ -30,3 +32,31 @@ def login_view(request):
 @login_required
 def perfil(request):
     return render(request, 'users/perfil.html')
+
+   # Vista de editar el perfil
+@login_required
+def editar_perfil(request):
+    usuario = request.user  
+
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST, request.FILES, instance=usuario) 
+
+        if miFormulario.is_valid():
+            if miFormulario.cleaned_data.get('imagen'):
+                if Imagen.objects.filter(user=usuario).exists():
+                    usuario.imagen.imagen = miFormulario.cleaned_data.get('imagen')
+                    usuario.imagen.save()
+                else:
+                    avatar = Imagen(user=usuario, imagen=miFormulario.cleaned_data.get('imagen'))
+                    avatar.save()
+
+            miFormulario.save()
+
+            # Mensaje de confirmación
+            messages.success(request, '¡Tu contraseña ha sido cambiada exitosamente!')
+            return redirect('perfil')  # Redirige al perfil u otra página
+    else:
+        miFormulario = UserEditForm(instance=usuario) 
+
+    return render(request, "users/editar_usuario.html", {"mi_form": miFormulario, "usuario": usuario})
+
