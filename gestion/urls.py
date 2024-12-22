@@ -4,7 +4,7 @@ from gestion import views as gestion_views
 
 
 urlpatterns = [
-    # Rutas para los veterinarios
+    
     path('veterinarios/', gestion_views.ListaVeterinariosView.as_view(), name='lista_veterinarios'),
     path('veterinarios/editar/<int:pk>/', gestion_views.EditarVeterinarioView.as_view(), name='editar_veterinario'),
     path('veterinarios/eliminar/<int:pk>/', gestion_views.EliminarVeterinarioView.as_view(), name='eliminar_veterinario'),
@@ -25,8 +25,9 @@ urlpatterns += [
     path('veterinarios/', gestion_views.lista_veterinarios, name='lista_veterinarios'),
     path('mascotas/agregar/', views.agregar_mascota, name='agregar_mascota'),
     path('buscar-veterinario/', gestion_views.buscar_veterinario, name='buscar_veterinario'),
+    path('about/', views.about, name='about'),
     
-    # User routes
+    
     path('mascotas/', views.ListaMascotasView.as_view(), name='lista_mascotas'),
     path('mascotas/editar/<int:pk>/', views.EditarMascotaView.as_view(), name='editar_mascota'),
     path('mascotas/eliminar/<int:pk>/', views.EliminarMascotaView.as_view(), name='eliminar_mascota'),

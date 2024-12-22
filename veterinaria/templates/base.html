@@ -26,7 +26,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'lista_veterinarios' %}">Veterinarios</a>
                     </li>
-    
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'about' %}">Acerca de mí</a>
+                    </li>
+
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{% url 'lista_mascotas' %}">Mis Mascotas</a>
@@ -59,7 +63,7 @@
                             </ul>
                         </div>
                     {% endif %}
-    
+
                     {% if user.is_authenticated and user.is_staff %}
                         <li class="nav-item">
                             <a href="{% url 'mascotas_por_usuario' %}" class="btn btn-info ms-3">Ver Mascotas</a>
@@ -70,7 +74,8 @@
         </div>
     </nav>
     
-    <div class="container mt-3">
+    <!-- Agregar margen superior para el contenido -->
+    <div class="container" style="margin-top: 80px;">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">

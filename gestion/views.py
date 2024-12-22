@@ -24,6 +24,11 @@ def buscar_veterinario(request):
     return render(request, 'gestion/buscar_veterinario.html', {'veterinarios': veterinarios, 'query': query})
 
 
+def about(request):
+    return render(request, 'gestion/about.html')
+
+
+
 @login_required
 def lista_mascotas(request):
     mascotas = Mascota.objects.filter(dueño=request.user)

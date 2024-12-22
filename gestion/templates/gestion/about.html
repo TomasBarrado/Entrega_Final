@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de mí{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Acerca de Nosotros</h1>
+
+    <!-- Texto de bienvenida -->
+    <p>Bienvenido a <strong>VeterinariaCoder</strong>! Somos un equipo dedicado a brindar soluciones innovadoras para el cuidado y la gestión de mascotas. Este proyecto fue desarrollado con mucho cariño por [tus nombres o equipo], con el objetivo de facilitar la interacción entre veterinarios, dueños y sus adorables animales. 🐾🐶🐱</p>
+    <p>Gracias por confiar en nosotros. Si tienes alguna pregunta, no dudes en <a href="mailto:tomibarrado@tomibarrado.com">contactarnos</a>.</p>
+
+    <div class="row">
+        <!-- Dirección -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Dirección</div>
+                <div class="card-body">
+                    <p class="card-text">Avenida Argentina 1820</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacto -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Contacto</div>
+                <div class="card-body">
+                    <p class="card-text">📞 3512345678</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Email</div>
+                <div class="card-body">
+                    <p class="card-text">📧 tomibarrado@tomibarrado.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
