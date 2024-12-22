@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegistroForm, UserEditForm
+from .forms import RegistroForm, UserEditForm, ImagenForm
 from django.contrib import messages
+from .models import Imagen
 
 
 
@@ -59,4 +60,32 @@ def editar_perfil(request):
         miFormulario = UserEditForm(instance=usuario) 
 
     return render(request, "users/editar_usuario.html", {"mi_form": miFormulario, "usuario": usuario})
+
+
+@login_required
+def agregar_imagen(request):
+    """
+    Vista para agregar o actualizar la imagen de perfil del usuario.
+    """
+    user = request.user  
+
+    try:
+        # Intentar obtener la imagen existente del usuario
+        imagen = user.avatar
+    except Imagen.DoesNotExist:
+        # Si no existe, inicializarla como None
+        imagen = None
+
+    if request.method == "POST":
+        form = ImagenForm(request.POST, request.FILES, instance=imagen)
+        if form.is_valid():
+            nueva_imagen = form.save(commit=False)
+            nueva_imagen.user = user
+            nueva_imagen.save()
+            return redirect("perfil")  # Redirige a la página de perfil
+    else:
+        form = ImagenForm(instance=imagen)
+
+    return render(request, "users/agregar_imagen.html", {"form": form})
+
 

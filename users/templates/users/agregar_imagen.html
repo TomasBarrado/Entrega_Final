@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Imagen{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Agregar o Actualizar Imagen de Perfil</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            {% if user.avatar.imagen %}
+                <h4>Imagen actual:</h4>
+                <img src="{{ user.avatar.imagen.url }}" alt="Imagen de perfil actual" class="img-thumbnail" style="max-height: 200px;">
+            {% else %}
+                <p>No tienes una imagen de perfil actualmente.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

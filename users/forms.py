@@ -32,4 +32,15 @@ class UserEditForm(UserCreationForm):
             # 'first_name'
         ]
         help_texts = {k:"" for k in fields}
+
+from .models import Imagen
+
+class ImagenForm(forms.ModelForm):
+    """
+    Formulario para gestionar las imágenes de perfil.
+    """
+    class Meta:
+        model = Imagen
+        fields = ['imagen']
+
         
