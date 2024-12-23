@@ -3,9 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Veterinaria{% endblock %}</title>
+    <title>{% block title %}Veterinaria Coder{% endblock %}</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://www.animalhome.com.mx/wp-content/uploads/2020/07/EQUIPO-VETERINARIO-INSTALACIONES-HOSPITAL-ANIMAL-HOME.jpg') no-repeat center center fixed;
+            background-size: contain; /* Ajustar imagen al tamaño de la pantalla sin recortar */
+            background-color: #000; /* Fondo negro para áreas no cubiertas */
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-x: hidden; /* Evita barras de desplazamiento horizontal */
+            color: white;
+        }
+
+        .content-container {
+            background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        a.nav-link, .navbar-brand, .dropdown-menu {
+            color: white !important;
+        }
+
+        a.nav-link:hover {
+            color: #ffc107 !important; /* Color amarillo al pasar el mouse */
+        }
+
+        .dropdown-menu {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo claro semitransparente */
+            border: 1px solid #ccc; /* Borde gris */
+        }
+
+        .dropdown-menu a.dropdown-item {
+            color: #000 !important; /* Color de texto negro */
+        }
+
+        .dropdown-menu a.dropdown-item:hover {
+            background-color: #f8f9fa; /* Fondo más claro al pasar el mouse */
+        }
+
+        .dropdown-toggle {
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
     
@@ -18,24 +62,21 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'inicio' %}">Inicio</a>
+                        <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'lista_servicios' %}">Servicios</a>
+                        <a class="nav-link" href="{% url 'lista_servicios' %}">Servicios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'lista_veterinarios' %}">Veterinarios</a>
+                        <a class="nav-link" href="{% url 'lista_veterinarios' %}">Veterinarios</a>
                     </li>
-                    
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{% url 'about' %}">Acerca de mí</a>
+                        <a class="nav-link" href="{% url 'about' %}">Acerca de mí</a>
                     </li>
-
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'lista_mascotas' %}">Mis Mascotas</a>
+                            <a class="nav-link" href="{% url 'lista_mascotas' %}">Mis Mascotas</a>
                         </li>
-                        
                         <div class="dropdown">
                             <img src="{{ user.avatar.imagen.url }}" alt="Imagen de perfil" class="rounded-circle me-2" style="height: 40px; width: 40px; object-fit: cover;">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +104,6 @@
                             </ul>
                         </div>
                     {% endif %}
-
                     {% if user.is_authenticated and user.is_staff %}
                         <li class="nav-item">
                             <a href="{% url 'mascotas_por_usuario' %}" class="btn btn-info ms-3">Ver Mascotas</a>
@@ -86,7 +126,7 @@
         {% endif %}
     </div>
     
-    <div class="container mt-4">
+    <div class="container content-container mt-4">
         {% block content %}
         {% endblock %}
     </div>
