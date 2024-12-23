@@ -34,7 +34,7 @@ def login_view(request):
 def perfil(request):
     return render(request, 'users/perfil.html')
 
-   # Vista de editar el perfil
+  
 @login_required
 def editar_perfil(request):
     usuario = request.user  
@@ -53,9 +53,8 @@ def editar_perfil(request):
 
             miFormulario.save()
 
-            # Mensaje de confirmación
             messages.success(request, '¡Tu contraseña ha sido cambiada exitosamente!')
-            return redirect('perfil')  # Redirige al perfil u otra página
+            return redirect('perfil') 
     else:
         miFormulario = UserEditForm(instance=usuario) 
 
@@ -70,10 +69,8 @@ def agregar_imagen(request):
     user = request.user  
 
     try:
-        # Intentar obtener la imagen existente del usuario
         imagen = user.avatar
     except Imagen.DoesNotExist:
-        # Si no existe, inicializarla como None
         imagen = None
 
     if request.method == "POST":
@@ -82,7 +79,7 @@ def agregar_imagen(request):
             nueva_imagen = form.save(commit=False)
             nueva_imagen.user = user
             nueva_imagen.save()
-            return redirect("perfil")  # Redirige a la página de perfil
+            return redirect("perfil") 
     else:
         form = ImagenForm(instance=imagen)
 
