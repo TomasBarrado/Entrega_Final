@@ -60,3 +60,5 @@ Espero que la pagina sea de su agrado. Saludos!
 
 
 ACCESO CASO DE PRUEBA: https://docs.google.com/spreadsheets/d/1y_8bvRzwgVyqBTkAKRw5Gtnk9lyxQggS/edit?usp=sharing&ouid=100819591818493129057&rtpof=true&sd=true
+ACCESO VIDEO: https://drive.google.com/file/d/1P6wN2LncvixwKm9jdpCzj_T4Zr83osz-/view?usp=sharing
+(se me corto al ultimo jajajajaj)
