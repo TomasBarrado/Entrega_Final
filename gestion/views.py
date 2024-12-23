@@ -70,13 +70,14 @@ def eliminar_mascota(request, pk):
 @login_required
 def agregar_veterinario(request):
     if request.method == 'POST':
-        form = VeterinarioForm(request.POST)
+        form = VeterinarioForm(request.POST, request.FILES)  # Usar request.FILES para manejar las imágenes
         if form.is_valid():
             form.save()
             return redirect('lista_veterinarios')
     else:
         form = VeterinarioForm()
     return render(request, 'gestion/agregar_veterinario.html', {'form': form})
+
 
 @login_required
 def eliminar_servicio(request, pk):
@@ -125,10 +126,12 @@ class EditarServicioView(LoginRequiredMixin, UpdateView):
 class EditarVeterinarioView(UpdateView):
     model = Veterinario
     template_name = 'gestion/editar_veterinario.html'
-    fields = ['nombre', 'matricula']  
+    fields = ['nombre', 'matricula', 'foto', 'descripcion']  # Asegúrate de que estos campos estén aquí
 
     def get_success_url(self):
         return reverse('lista_veterinarios')
+
+
     
 class EliminarVeterinarioView(DeleteView):
     model = Veterinario

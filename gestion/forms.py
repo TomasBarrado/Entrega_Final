@@ -9,7 +9,7 @@ class MascotaForm(forms.ModelForm):
 class VeterinarioForm(forms.ModelForm):
     class Meta:
         model = Veterinario
-        fields = ['nombre', 'matricula', 'descripcion'] 
+        fields = ['nombre', 'matricula', 'foto', 'descripcion']  
 
 class ServicioForm(forms.ModelForm):
     class Meta:

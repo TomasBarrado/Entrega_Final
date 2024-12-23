@@ -22,8 +22,11 @@ class Servicio(models.Model):
 
 class Veterinario(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    matricula = models.CharField(max_length=20)
+    matricula = models.CharField(max_length=50)
+    foto = models.ImageField(upload_to='veterinarios/', blank=True, null=True)
+    descripcion = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.nombre} (Matrícula: {self.matricula})"
+        return self.nombre
+
+
