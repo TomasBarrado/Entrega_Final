@@ -57,3 +57,6 @@ Registrarse / Iniciar Sesión: Permite a los usuarios registrarse o autenticarse
 
 
 Espero que la pagina sea de su agrado. Saludos!
+
+
+ACCESO CASO DE PRUEBA: https://docs.google.com/spreadsheets/d/1y_8bvRzwgVyqBTkAKRw5Gtnk9lyxQggS/edit?usp=sharing&ouid=100819591818493129057&rtpof=true&sd=true
